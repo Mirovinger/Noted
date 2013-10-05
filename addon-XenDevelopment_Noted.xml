@@ -15,28 +15,32 @@
   <email_templates/>
   <email_template_modifications/>
   <optiongroups>
-    <group group_id="XenDevelop_Node_OptionGroup" display_order="1" debug_only="0"/>
     <option option_id="XenDevelop_Noted_Option_charlimit" edit_format="spinbox" data_type="integer" can_backup="1">
       <default_value>0</default_value>
       <edit_format_params></edit_format_params>
       <sub_options></sub_options>
-      <relation group_id="XenDevelop_Node_OptionGroup" display_order="0"/>
       <relation group_id="users" display_order="10"/>
     </option>
   </optiongroups>
   <permissions>
-    <permission_groups/>
+    <permission_groups>
+      <permission_group permission_group_id="XenDevelop_Noted_Group"/>
+    </permission_groups>
     <permissions>
-      <permission permission_group_id="general" permission_id="XenDevelop_Noted_access" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="1"/>
+      <permission permission_group_id="XenDevelop_Noted_Group" permission_id="can_access" permission_type="flag" default_value="unset" interface_group_id="Noted" display_order="1"/>
+      <permission permission_group_id="XenDevelop_Noted_Group" permission_id="char_limit" permission_type="integer" depend_permission_id="XenDevelop_Noted_access" default_value_int="0" interface_group_id="Noted" display_order="1"/>
     </permissions>
-    <interface_groups/>
+    <interface_groups>
+      <interface_group interface_group_id="Noted" display_order="1"/>
+    </interface_groups>
   </permissions>
   <phrases>
-    <phrase title="option_group_XenDevelop_Node_OptionGroup" version_id="100" version_string="1.0.0"><![CDATA[Notes Options]]></phrase>
-    <phrase title="option_group_XenDevelop_Node_OptionGroup_description" version_id="100" version_string="1.0.0"><![CDATA[Options for user notes.]]></phrase>
     <phrase title="option_XenDevelop_Noted_Option_charlimit" version_id="100" version_string="1.0.0"><![CDATA[Notes Character Limit]]></phrase>
     <phrase title="option_XenDevelop_Noted_Option_charlimit_explain" version_id="100" version_string="1.0.0"><![CDATA[The maximum number of characters allowed in notes. If set to 0, length is not limited.]]></phrase>
-    <phrase title="permission_general_XenDevelop_Noted_access" version_id="100" version_string="1.0.0"><![CDATA[Access Noted]]></phrase>
+    <phrase title="permission_group_XenDevelop_Noted_Group" version_id="101" version_string="1.0.1"><![CDATA[Notes Permissions]]></phrase>
+    <phrase title="permission_interface_Noted" version_id="101" version_string="1.0.1"><![CDATA[Notes Permissions]]></phrase>
+    <phrase title="permission_XenDevelop_Noted_Group_can_access" version_id="101" version_string="1.0.1"><![CDATA[Access Noted]]></phrase>
+    <phrase title="permission_XenDevelop_Noted_Group_char_limit" version_id="101" version_string="1.0.1"><![CDATA[Maximum Characters In Notes]]></phrase>
     <phrase title="XenDevelop_Noted_please_enter_note_with_fewer_chars" version_id="100" version_string="1.0.0"><![CDATA[Please enter a note with no more than {count} characters.]]></phrase>
     <phrase title="XenDevelop_Noted_title" version_id="100" version_string="1.0.0"><![CDATA[Notes]]></phrase>
   </phrases>

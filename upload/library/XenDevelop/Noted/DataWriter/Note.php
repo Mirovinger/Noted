@@ -61,9 +61,9 @@ class XenDevelop_Noted_DataWriter_Note extends XenForo_DataWriter
     protected function _preSave()
     {
         if ($this->isChanged('content')) {
-            $options   = XenForo_Application::getOptions();
-            $maxLength = (int) $options->get('XenDevelop_Noted_Option_charlimit');
-            if ($maxLength != 0 && utf8_strlen($this->get('content')) > $maxLength) {
+            $visitor   = XenForo_Visitor::getInstance();
+            $maxLength = (int) $visitor->hasPermission('XenDevelop_Noted_Group', 'char_limit');
+            if ($maxLength != -1 && utf8_strlen($this->get('content')) > $maxLength) {
                 $this->error(
                      new XenForo_Phrase('XenDevelop_Noted_please_enter_note_with_fewer_chars', array('count' => $maxLength)),
                      'content'
