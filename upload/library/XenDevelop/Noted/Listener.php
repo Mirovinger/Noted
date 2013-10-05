@@ -42,7 +42,7 @@ SQL;
     {
         $version = 0;
         if (is_array($installedAddon)) {
-            $version = (int)$installedAddon['version_id'];
+            $version = (int) $installedAddon['version_id'];
         }
 
         $db = XenForo_Application::getDb();

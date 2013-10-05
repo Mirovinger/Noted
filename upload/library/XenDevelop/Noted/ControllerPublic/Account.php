@@ -21,12 +21,12 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
 
         return $this->_getWrapper(
                     'noted',
-                        'view',
-                        $this->responseView(
-                             'XenDevelop_Noted_ViewPublic_Account_Noted',
-                                 'XenDevelop_Noted_view',
-                                 $templateVars
-                        )
+                    'view',
+                    $this->responseView(
+                         'XenDevelop_Noted_ViewPublic_Account_Noted',
+                         'XenDevelop_Noted_view',
+                         $templateVars
+                    )
         );
     }
 
@@ -48,7 +48,7 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
 
         if ($existingNotesId = $noteModel->getNotesIdForUser($visitorId)) {
             $existingData = array(
-                'id' => (int)$existingNotesId,
+                'id'      => (int) $existingNotesId,
                 'user_id' => $visitorId,
             );
 
@@ -68,7 +68,7 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
         if ($writer->save()) {
             return $this->responseRedirect(
                         XenForo_ControllerResponse_Redirect::SUCCESS,
-                            XenForo_Link::buildPublicLink('account/noted')
+                        XenForo_Link::buildPublicLink('account/noted')
             );
         } else {
             return $this->responseError($writer->getErrors());
