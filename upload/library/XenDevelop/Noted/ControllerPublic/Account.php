@@ -1,6 +1,6 @@
 <?php
 
-class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_ControllerPublic_Account
+class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_ControllerPublic_Account
 {
     /**
      * Display the user notes page.
@@ -20,8 +20,13 @@ class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_C
         );
 
         return $this->_getWrapper(
-                    'noted', 'view',
-                        $this->responseView('XenDevelop_Noted_ViewPublic_Account_Noted', 'XenDevelop_Noted_view', $templateVars)
+                    'noted',
+                        'view',
+                        $this->responseView(
+                             'XenDevelop_Noted_ViewPublic_Account_Noted',
+                                 'XenDevelop_Noted_view',
+                                 $templateVars
+                        )
         );
     }
 
@@ -43,7 +48,7 @@ class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_C
 
         if ($existingNotesId = $noteModel->getNotesIdForUser($visitorId)) {
             $existingData = array(
-                'id' => (int) $existingNotesId,
+                'id' => (int)$existingNotesId,
                 'user_id' => $visitorId,
             );
 
@@ -54,16 +59,19 @@ class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_C
 
         $writer->set('content', $message);
 
+        $writer->preSave();
+
+        if ($writer->hasErrors()) {
+            return $this->responseError($writer->getErrors());
+        }
+
         if ($writer->save()) {
             return $this->responseRedirect(
                         XenForo_ControllerResponse_Redirect::SUCCESS,
                             XenForo_Link::buildPublicLink('account/noted')
             );
         } else {
-            return $this->responseRedirect(
-                        XenForo_ControllerResponse_Redirect::ERROR,
-                            XenForo_Link::buildPublicLink('account/noted')
-            );
+            return $this->responseError($writer->getErrors());
         }
     }
 

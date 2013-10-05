@@ -19,7 +19,7 @@ SQL;
     /**
      * Register class extensions.
      *
-     * @param       $class The class being called.
+     * @param       $class  The class being called.
      * @param array $extend Array of extenders.
      */
     public static function extendAccountController($class, array &$extend)
@@ -42,7 +42,7 @@ SQL;
     {
         $version = 0;
         if (is_array($installedAddon)) {
-            $version = (int) $installedAddon['version_id'];
+            $version = (int)$installedAddon['version_id'];
         }
 
         $db = XenForo_Application::getDb();

@@ -11,7 +11,7 @@ class XenDevelop_Noted_DataWriter_Note extends XenForo_DataWriter
     {
         return array(
             'xf_user_notes' => array(
-                'id' => array('type' => self::TYPE_UINT, 'autoIncrement' => true),
+                'id'      => array('type' => self::TYPE_UINT, 'autoIncrement' => true),
                 'user_id' => array('type' => self::TYPE_UINT, 'required' => true),
                 'content' => array('type' => self::TYPE_STRING, 'required' => false),
             )
@@ -37,11 +37,27 @@ class XenDevelop_Noted_DataWriter_Note extends XenForo_DataWriter
     /**
      * Gets SQL condition to update the existing record.
      *
+     * @param string $tableName Name of the table to fetch the condition for
+     *
      * @return string
      */
     protected function _getUpdateCondition($tableName)
     {
         return 'user_id = ' . $this->_db->quote($this->getExisting('user_id'));
+    }
+
+    /**
+     * Validation ran before saving.
+     */
+    protected function _preSave()
+    {
+        if ($this->isChanged('content')) {
+            $options = XenForo_Application::getOptions();
+            $maxLength = (int) $options->get('XenDevelop_Noted_Option_charlimit');
+            if ($maxLength != 0 && utf8_strlen($this->get('content')) > $maxLength) {
+                $this->error(new XenForo_Phrase('XenDevelop_Noted_please_enter_note_with_fewer_chars', array('count' => $maxLength)), 'content');
+            }
+        }
     }
 
     /**

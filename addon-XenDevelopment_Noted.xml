@@ -14,7 +14,16 @@
   <cron/>
   <email_templates/>
   <email_template_modifications/>
-  <optiongroups/>
+  <optiongroups>
+    <group group_id="XenDevelop_Node_OptionGroup" display_order="1" debug_only="0"/>
+    <option option_id="XenDevelop_Noted_Option_charlimit" edit_format="spinbox" data_type="integer" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="XenDevelop_Node_OptionGroup" display_order="0"/>
+      <relation group_id="users" display_order="10"/>
+    </option>
+  </optiongroups>
   <permissions>
     <permission_groups/>
     <permissions>
@@ -23,7 +32,12 @@
     <interface_groups/>
   </permissions>
   <phrases>
+    <phrase title="option_group_XenDevelop_Node_OptionGroup" version_id="100" version_string="1.0.0"><![CDATA[Notes Options]]></phrase>
+    <phrase title="option_group_XenDevelop_Node_OptionGroup_description" version_id="100" version_string="1.0.0"><![CDATA[Options for user notes.]]></phrase>
+    <phrase title="option_XenDevelop_Noted_Option_charlimit" version_id="100" version_string="1.0.0"><![CDATA[Notes Character Limit]]></phrase>
+    <phrase title="option_XenDevelop_Noted_Option_charlimit_explain" version_id="100" version_string="1.0.0"><![CDATA[The maximum number of characters allowed in notes. If set to 0, length is not limited.]]></phrase>
     <phrase title="permission_general_XenDevelop_Noted_access" version_id="100" version_string="1.0.0"><![CDATA[Access Noted]]></phrase>
+    <phrase title="XenDevelop_Noted_please_enter_note_with_fewer_chars" version_id="100" version_string="1.0.0"><![CDATA[Please enter a note with no more than {count} characters.]]></phrase>
     <phrase title="XenDevelop_Noted_title" version_id="100" version_string="1.0.0"><![CDATA[Notes]]></phrase>
   </phrases>
   <route_prefixes/>
