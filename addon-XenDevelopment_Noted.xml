@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="XenDevelopment_Noted" title="Noted" version_string="1.0.0" version_id="100" url="http://www.xendevelop.com" install_callback_class="XenDevelop_Noted_Listener" install_callback_method="install" uninstall_callback_class="XenDevelop_Noted_Listener" uninstall_callback_method="uninstall">
+<addon addon_id="XenDevelopment_Noted" title="Noted" version_string="1.0.1" version_id="101" url="http://www.xendevelop.com" install_callback_class="XenDevelop_Noted_Listener" install_callback_method="install" uninstall_callback_class="XenDevelop_Noted_Listener" uninstall_callback_method="uninstall">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
