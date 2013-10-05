@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: euan
- * Date: 05/10/13
- * Time: 12:33
- */
 
 class XenDevelop_Noted_ViewPublic_Account_Noted extends XenForo_ViewPublic_Base
 {

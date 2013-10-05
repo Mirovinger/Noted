@@ -7,10 +7,9 @@ class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_C
      */
     public function actionNoted()
     {
-        $visitor = XenForo_Visitor::getInstance();
         $visitorId = XenForo_Visitor::getUserId();
 
-        if (!$visitor->hasPermission('general', 'XenDevelop_Noted_access')) {
+        if (!XenForo_Visitor::getInstance()->hasPermission('general', 'XenDevelop_Noted_access')) {
             return $this->responseNoPermission();
         }
 
@@ -29,6 +28,10 @@ class XenDevelop_Noted_ControllerPublic_Account  extends XFCP_XenDevelop_Noted_C
     public function actionNotedSave()
     {
         $this->_assertPostOnly();
+
+        if (!XenForo_Visitor::getInstance()->hasPermission('general', 'XenDevelop_Noted_access')) {
+            return $this->responseNoPermission();
+        }
 
         $noteModel = $this->_getNoteModel();
         $visitorId = XenForo_Visitor::getUserId();
