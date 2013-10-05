@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="XenDevelopment_Noted" title="Noted" version_string="1.0.0" version_id="100" url="http://www.xendevelop.com" install_callback_class="XenDevelop_Noted_Listener" install_callback_method="install" uninstall_callback_class="XenDevelop_Noted_Listener" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="XenDevelop_Noted_Listener" callback_method="extendAccountController" active="1" hint="XenForo_ControllerPublic_Account" description="Add actions to the Account Controller for Noted."/>
+    <listener event_id="template_hook" execute_order="10" callback_class="XenDevelop_Noted_TemplateHook_Public" callback_method="accountWrapperSidebar" active="1" hint="account_wrapper_sidebar_your_account" description="Add a new link to the account area sidebar."/>
+    <listener event_id="template_hook" execute_order="10" callback_class="XenDevelop_Noted_TemplateHook_Public" callback_method="navigationVisitorTab" active="1" hint="navigation_visitor_tab_links2" description="Add a new link to the navigation visitor tab."/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions>
+      <permission permission_group_id="general" permission_id="XenDevelop_Noted_access" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="1"/>
+    </permissions>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="permission_general_XenDevelop_Noted_access" version_id="100" version_string="1.0.0"><![CDATA[Access Noted]]></phrase>
+    <phrase title="XenDevelop_Noted_title" version_id="100" version_string="1.0.0"><![CDATA[Notes]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates>
+    <template title="XenDevelop_Noted_account_sidebar_entry" version_id="100" version_string="1.0.0"><![CDATA[<li>
+	<a class="{xen:if "{$selectedKey} == 'noted/view'", 'secondaryContent', 'primaryContent'}" href="{xen:link account/noted}">
+		{xen:phrase XenDevelop_Noted_title}
+	</a>
+</li>]]></template>
+    <template title="XenDevelop_Noted_navigation_visitor_tab_entry" version_id="100" version_string="1.0.0"><![CDATA[<li><a href="{xen:link account/noted}">{xen:phrase XenDevelop_Noted_title}</a></li>]]></template>
+    <template title="XenDevelop_Noted_view" version_id="100" version_string="1.0.0"><![CDATA[<xen:title>{xen:phrase XenDevelop_Noted_title}</xen:title>
+
+<form action="{xen:link 'account/noted-save', $noted}" method="post" class="xenForm Preview AutoValidator">
+
+	<fieldset>
+		<dl class="ctrlUnit fullWidth surplusLabel">
+			<dt><label for="ctrl_message">{xen:phrase XenDevelop_Noted_title}:</label></dt>
+			<dd>{xen:raw $editorTemplate}</dd>
+		</dl>
+	</fieldset>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd>
+			<input type="submit" value="{xen:phrase save_changes}" accesskey="s" class="button primary" />
+		</dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+  </templates>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+</addon>
