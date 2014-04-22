@@ -65,8 +65,8 @@ class XenDevelop_Noted_DataWriter_Note extends XenForo_DataWriter
             $maxLength = (int) $visitor->hasPermission('XenDevelop_Noted_Group', 'char_limit');
             if ($maxLength != -1 && utf8_strlen($this->get('content')) > $maxLength) {
                 $this->error(
-                     new XenForo_Phrase('XenDevelop_Noted_please_enter_note_with_fewer_chars', array('count' => $maxLength)),
-                     'content'
+                    new XenForo_Phrase('XenDevelop_Noted_please_enter_note_with_fewer_chars', array('count' => $maxLength)),
+                    'content'
                 );
             }
         }

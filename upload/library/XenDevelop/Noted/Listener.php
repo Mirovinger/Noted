@@ -19,24 +19,20 @@ SQL;
     /**
      * Register class extensions.
      *
-     * @param       $class  The class being called.
-     * @param array $extend Array of extenders.
+     * @param string $class  The class being called.
+     * @param array  $extend Array of extenders.
      */
     public static function extendAccountController($class, array &$extend)
     {
         if ($class == 'XenForo_ControllerPublic_Account') {
-            $extenders = array(
-                'XenDevelop_Noted_ControllerPublic_Account',
-            );
-
-            $extend = array_merge($extend, $extenders);
+            $extend[] = 'XenDevelop_Noted_ControllerPublic_Account';
         }
     }
 
     /**
      * Function to be called on install.
      *
-     * @param array $installedAddon Details about the addon being installed.
+     * @param array $installedAddon Details about the add-on being installed.
      */
     public static function install($installedAddon)
     {

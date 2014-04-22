@@ -19,6 +19,7 @@ class XenDevelop_Noted_Model_Note extends XenForo_Model
         $userId      = (int) $userId;
         $queryString = 'SELECT content FROM xf_user_notes WHERE user_id = ? LIMIT 1;';
         $content     = $this->_getDb()->fetchOne($queryString, $userId);
+
         return $content;
     }
 
@@ -34,6 +35,7 @@ class XenDevelop_Noted_Model_Note extends XenForo_Model
         $userId      = (int) $userId;
         $queryString = 'SELECT id FROM xf_user_notes WHERE user_id = ? LIMIT 1;';
         $content     = $this->_getDb()->fetchOne($queryString, $userId);
+
         return (int) $content;
     }
 
@@ -49,6 +51,7 @@ class XenDevelop_Noted_Model_Note extends XenForo_Model
         $noteId      = (int) $noteId;
         $queryString = 'SELECT * FROM xf_user_notes WHERE id = ? LIMIT 1;';
         $content     = $this->_getDb()->fetchRow($queryString, $noteId);
+
         return $content;
     }
 } 

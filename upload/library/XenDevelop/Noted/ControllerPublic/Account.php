@@ -7,14 +7,13 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
      */
     public function actionNoted()
     {
-        $visitorId = XenForo_Visitor::getUserId();
-        $visitor   = XenForo_Visitor::getInstance();
+        $visitor = XenForo_Visitor::getInstance();
 
-        if (!XenForo_Visitor::getInstance()->hasPermission('XenDevelop_Noted_Group', 'can_access')) {
+        if (!$visitor->hasPermission('XenDevelop_Noted_Group', 'can_access')) {
             return $this->responseNoPermission();
         }
 
-        $notes = $this->_getNoteModel()->getNotesForUser($visitorId);
+        $notes = $this->_getNoteModel()->getNotesForUser($visitor->getUserId());
 
         $templateVars = array(
             'notes' => $notes,
@@ -23,13 +22,13 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
         echo $visitor->hasPermission('XenDevelop_Noted_Group', 'char_limit');
 
         return $this->_getWrapper(
-                    'noted',
-                    'view',
-                    $this->responseView(
-                         'XenDevelop_Noted_ViewPublic_Account_Noted',
-                         'XenDevelop_Noted_view',
-                         $templateVars
-                    )
+            'noted',
+            'view',
+            $this->responseView(
+                'XenDevelop_Noted_ViewPublic_Account_Noted',
+                'XenDevelop_Noted_view',
+                $templateVars
+            )
         );
     }
 
@@ -37,27 +36,29 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
     {
         $this->_assertPostOnly();
 
-        if (!XenForo_Visitor::getInstance()->hasPermission('XenDevelop_Noted_Group', 'can_access')) {
+        $visitor = XenForo_Visitor::getInstance();
+
+        if (!$visitor->hasPermission('XenDevelop_Noted_Group', 'can_access')) {
             return $this->responseNoPermission();
         }
 
+        /** @var XenDevelop_Noted_Model_Note $noteModel */
         $noteModel = $this->_getNoteModel();
-        $visitorId = XenForo_Visitor::getUserId();
 
         $message = $this->getHelper('Editor')->getMessageText('message', $this->_input);
         $message = XenForo_Helper_String::autoLinkBbCode($message);
 
         $writer = XenForo_DataWriter::create('XenDevelop_Noted_DataWriter_Note');
 
-        if ($existingNotesId = $noteModel->getNotesIdForUser($visitorId)) {
+        if ($existingNotesId = $noteModel->getNotesIdForUser($visitor->getUserId())) {
             $existingData = array(
                 'id'      => (int) $existingNotesId,
-                'user_id' => $visitorId,
+                'user_id' => $visitor->getUserId(),
             );
 
             $writer->setExistingData($existingData);
         } else {
-            $writer->set('user_id', $visitorId);
+            $writer->set('user_id', $visitor->getUserId());
         }
 
         $writer->set('content', $message);
@@ -70,8 +71,8 @@ class XenDevelop_Noted_ControllerPublic_Account extends XFCP_XenDevelop_Noted_Co
 
         if ($writer->save()) {
             return $this->responseRedirect(
-                        XenForo_ControllerResponse_Redirect::SUCCESS,
-                        XenForo_Link::buildPublicLink('account/noted')
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildPublicLink('account/noted')
             );
         } else {
             return $this->responseError($writer->getErrors());
